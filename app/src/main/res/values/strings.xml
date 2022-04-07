@@ -2,4 +2,7 @@
     <string name="app_name">MovieSearch</string>
     <string name="search_movie">검색</string>
     <string name="search_current">최근 검색</string>
+    <string name="title">제목</string>
+    <string name="publish_date">출시</string>
+    <string name="rating_score">평점</string>
 </resources>
