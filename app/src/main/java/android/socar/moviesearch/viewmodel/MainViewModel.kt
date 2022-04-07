@@ -19,12 +19,8 @@ class MainViewModel(
     fun fetchInformation(query: String) {
         viewModelScope.launch {
             when(val result = repository.fetchMovieInfo(query)) {
-                is Result.Success<List<MovieInformation>> -> {
-                    _movieInfoList.value = result.data
-                }
-                is Result.Error -> {
-                    Log.e("MainViewModel :: ", "${result.exception}")
-                }
+                is Result.Success<List<MovieInformation>> -> _movieInfoList.value = result.data
+                is Result.Error -> Log.e("MainViewModel :: ", "${result.exception}")
             }
         }
     }
