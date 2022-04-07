@@ -18,6 +18,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.viewModel = mainViewModel
+
+        setClickListener()
     }
 
+    private fun setClickListener() {
+        with(binding) {
+            btnSearchMovie.setOnClickListener {
+                mainViewModel.fetchInformation(evMovieSearch.text.toString())
+            }
+        }
+    }
 }
