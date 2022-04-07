@@ -1,5 +1,6 @@
 package android.socar.moviesearch.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.socar.moviesearch.R
@@ -42,6 +43,12 @@ class MainActivity : AppCompatActivity(), MovieItemClickListener {
     }
 
     override fun onItemClick(url: String) {
+        val intent = Intent(this, MovieInfoActivity::class.java)
+        intent.putExtra(WEB_ACTIVITY_KEY, url)
+        startActivity(intent)
+    }
 
+    companion object {
+        const val WEB_ACTIVITY_KEY = "link"
     }
 }
