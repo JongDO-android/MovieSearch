@@ -30,5 +30,6 @@ class MainViewModel(
 
     fun saveSearchInformation(context: Context) {
         localRepository.saveSearchInformation(context, remoteRepository.searchList)
+        remoteRepository.clear()
     }
 }
