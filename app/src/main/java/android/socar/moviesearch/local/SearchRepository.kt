@@ -16,18 +16,20 @@ class SearchRepository: RemoteRepository, LocalRepository {
     private val _searchList = mutableListOf<String>()
     override val searchList: List<String> get() = _searchList
 
-    override suspend fun fetchMovieInfo(query: String): Result<List<MovieInformation>> {
+    override suspend fun fetchMovieInfo(query: String, isFirst: Boolean): Result<List<MovieInformation>> {
         return try {
             val result = service.searchMovieInfo(
                 NaverApi.CLIENT_ID,
                 NaverApi.CLIENT_SECRET,
                 query
             )
-            if(_searchList.size == 10) {
-                _searchList.removeAt(0)
-            }
-            if(!_searchList.contains(query)) {
-                _searchList.add(query)
+            if(isFirst) {
+                if(_searchList.size == 10) {
+                    _searchList.removeAt(0)
+                }
+                if(!_searchList.contains(query)) {
+                    _searchList.add(query)
+                }
             }
 
             Result.Success(result.items)
