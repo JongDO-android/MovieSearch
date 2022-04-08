@@ -60,5 +60,6 @@ class MainActivity : AppCompatActivity(), MovieItemClickListener {
     companion object {
         const val WEB_ACTIVITY_KEY = "link"
         const val PREFERENCE_KEY = "searched_data"
+        const val SEARCHED_INFO_KEY = "searched_information_key"
     }
 }
