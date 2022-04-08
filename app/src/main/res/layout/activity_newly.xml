@@ -19,7 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ListView
+        <LinearLayout
             android:id="@+id/lv_search_log_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
