@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity(), MovieItemClickListener {
             btnSearchMovie.setOnClickListener {
                 mainViewModel.fetchInformation(evMovieSearch.text.toString())
             }
+            btnCurrentSearch.setOnClickListener {
+                val intent = Intent(this@MainActivity, NewlyActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -48,7 +52,13 @@ class MainActivity : AppCompatActivity(), MovieItemClickListener {
         startActivity(intent)
     }
 
+    override fun onPause() {
+        super.onPause()
+        mainViewModel.saveSearchInformation(this)
+    }
+
     companion object {
         const val WEB_ACTIVITY_KEY = "link"
+        const val PREFERENCE_KEY = "searched_data"
     }
 }
