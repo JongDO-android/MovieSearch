@@ -9,11 +9,14 @@ import android.socar.moviesearch.di.ViewModelFactory
 import android.socar.moviesearch.ui.adapter.MovieAdapter
 import android.socar.moviesearch.ui.adapter.MovieItemClickListener
 import android.socar.moviesearch.viewmodel.MainViewModel
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity(), MovieItemClickListener {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var resultActivity: ActivityResultLauncher<Intent>
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this, ViewModelFactory())[MainViewModel::class.java]
     }
@@ -32,16 +35,25 @@ class MainActivity : AppCompatActivity(), MovieItemClickListener {
             movieAdapter.submitList(it)
         }
         setClickListener()
+
+        resultActivity = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) { result ->
+            if(result.resultCode == RESULT_OK) {
+                val searchedKeyword = result.data?.getStringExtra(SEARCHED_KEYWORD)
+                binding.evMovieSearch.setText(searchedKeyword)
+                mainViewModel.fetchInformation(searchedKeyword.toString(), false)
+            }
+        }
     }
 
     private fun setClickListener() {
         with(binding) {
             btnSearchMovie.setOnClickListener {
-                mainViewModel.fetchInformation(evMovieSearch.text.toString())
+                mainViewModel.fetchInformation(evMovieSearch.text.toString(), true)
             }
             btnCurrentSearch.setOnClickListener {
                 val intent = Intent(this@MainActivity, NewlyActivity::class.java)
-                startActivity(intent)
+                resultActivity.launch(intent)
             }
         }
     }
@@ -61,5 +73,6 @@ class MainActivity : AppCompatActivity(), MovieItemClickListener {
         const val WEB_ACTIVITY_KEY = "link"
         const val PREFERENCE_KEY = "searched_data"
         const val SEARCHED_INFO_KEY = "searched_information_key"
+        const val SEARCHED_KEYWORD = "searched_keyword"
     }
 }
