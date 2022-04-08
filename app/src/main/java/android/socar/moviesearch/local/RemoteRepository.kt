@@ -6,4 +6,5 @@ import android.socar.moviesearch.remote.dto.MovieInformation
 interface RemoteRepository {
     val searchList: List<String>
     suspend fun fetchMovieInfo(query: String): Result<List<MovieInformation>>
+    fun clear()
 }
