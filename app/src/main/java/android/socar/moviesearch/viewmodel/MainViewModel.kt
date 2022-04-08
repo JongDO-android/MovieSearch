@@ -19,9 +19,9 @@ class MainViewModel(
     private val _movieInfoList = MutableLiveData<List<MovieInformation>>()
     val movieInformation: LiveData<List<MovieInformation>> get() = _movieInfoList
 
-    fun fetchInformation(query: String) {
+    fun fetchInformation(query: String, isFirst: Boolean) {
         viewModelScope.launch {
-            when(val result = remoteRepository.fetchMovieInfo(query)) {
+            when(val result = remoteRepository.fetchMovieInfo(query, isFirst)) {
                 is Result.Success<List<MovieInformation>> -> _movieInfoList.value = result.data
                 is Result.Error -> Log.e("MainViewModel :: ", "${result.exception}")
             }
