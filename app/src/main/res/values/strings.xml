@@ -5,4 +5,5 @@
     <string name="title">제목</string>
     <string name="publish_date">출시</string>
     <string name="rating_score">평점</string>
+    <string name="newly_search_log">최근 검색 기록</string>
 </resources>
