@@ -1,5 +1,6 @@
 package android.socar.moviesearch.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.socar.moviesearch.R
@@ -26,6 +27,13 @@ class NewlyActivity : AppCompatActivity() {
                 this@NewlyActivity,
                 R.drawable.button_shape
             )
+            setOnClickListener {
+                val intent = Intent(this@NewlyActivity, MainActivity::class.java).apply {
+                    putExtra(MainActivity.SEARCHED_KEYWORD, search)
+                }
+                setResult(RESULT_OK, intent)
+                finish()
+            }
         }
         binding.lvSearchLogList.addView(button)
     }
