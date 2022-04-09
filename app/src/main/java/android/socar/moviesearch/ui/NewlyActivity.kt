@@ -35,7 +35,7 @@ class NewlyActivity : AppCompatActivity() {
                 finish()
             }
         }
-        binding.lvSearchLogList.addView(button)
+        binding.flSearchLogList.addView(button)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

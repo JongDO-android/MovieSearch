@@ -18,12 +18,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-
-        <LinearLayout
-            android:id="@+id/lv_search_log_list"
+        
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/fl_search_log_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            app:flexWrap="wrap"
             app:layout_constraintTop_toBottomOf="@id/tv_newly_search_log"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
